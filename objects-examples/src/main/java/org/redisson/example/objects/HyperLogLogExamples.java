@@ -20,12 +20,14 @@ import java.util.Arrays;
 import org.redisson.Redisson;
 import org.redisson.api.RHyperLogLog;
 import org.redisson.api.RedissonClient;
+import org.redisson.client.RedisClient;
+import org.redisson.example.common.client.CacheClient;
 
 public class HyperLogLogExamples {
 
     public static void main(String[] args) {
         // connects to 127.0.0.1:6379 by default
-        RedissonClient redisson = Redisson.create();
+        RedissonClient redisson = CacheClient.useRedisson();
 
         RHyperLogLog<String> hyperLogLog = redisson.getHyperLogLog("hyperLogLog");
         hyperLogLog.add("1");
@@ -42,10 +44,13 @@ public class HyperLogLogExamples {
         hyperLogLog1.add("4");
         hyperLogLog1.add("5");
         hyperLogLog1.add("6");
-        
-        hyperLogLog2.mergeWith(hyperLogLog1.getName());
-        hyperLogLog2.countWith(hyperLogLog1.getName());
+        hyperLogLog1.add("7");
+        hyperLogLog1.add("8");
+        hyperLogLog1.add("9");
 
+//        hyperLogLog2.mergeWith(hyperLogLog1.getName());
+//        hyperLogLog2.countWith(hyperLogLog1.getName());
+        System.out.println(hyperLogLog1.count());
         redisson.shutdown();
     }
 

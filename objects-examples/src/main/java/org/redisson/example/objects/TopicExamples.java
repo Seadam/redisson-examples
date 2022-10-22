@@ -21,12 +21,13 @@ import org.redisson.Redisson;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.listener.MessageListener;
+import org.redisson.example.common.client.CacheClient;
 
 public class TopicExamples {
 
     public static void main(String[] args) throws InterruptedException {
         // connects to 127.0.0.1:6379 by default
-        RedissonClient redisson = Redisson.create();
+        RedissonClient redisson = CacheClient.useRedisson();
 
         CountDownLatch latch = new CountDownLatch(1);
         
@@ -34,6 +35,7 @@ public class TopicExamples {
         topic.addListener(String.class, new MessageListener<String>() {
             @Override
             public void onMessage(CharSequence channel, String msg) {
+                System.out.println("接收到消息啦：" + msg);
                 latch.countDown();
             }
         });

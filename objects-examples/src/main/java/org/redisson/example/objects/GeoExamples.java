@@ -24,13 +24,15 @@ import org.redisson.api.GeoPosition;
 import org.redisson.api.GeoUnit;
 import org.redisson.api.RGeo;
 import org.redisson.api.RedissonClient;
+import org.redisson.example.common.client.CacheClient;
 
 public class GeoExamples {
 
     public static void main(String[] args) {
         // connects to 127.0.0.1:6379 by default
-        RedissonClient redisson = Redisson.create();
+//        RedissonClient redisson = Redisson.create();
 
+        RedissonClient redisson = CacheClient.useRedisson();
         RGeo<String> geo = redisson.getGeo("myGeo");
         GeoEntry entry = new GeoEntry(13.361389, 38.115556, "Palermo");
         geo.add(entry);

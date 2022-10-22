@@ -5,7 +5,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 
-public class RedisClient {
+public class CacheClient {
 
 
     public static RedissonClient useRedisson() {

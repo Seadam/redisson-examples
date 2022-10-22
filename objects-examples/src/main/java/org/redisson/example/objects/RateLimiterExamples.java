@@ -22,12 +22,13 @@ import org.redisson.api.RRateLimiter;
 import org.redisson.api.RateIntervalUnit;
 import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
+import org.redisson.example.common.client.CacheClient;
 
 public class RateLimiterExamples {
 
     public static void main(String[] args) throws InterruptedException {
         // connects to 127.0.0.1:6379 by default
-        RedissonClient redisson = Redisson.create();
+        RedissonClient redisson = CacheClient.useRedisson();
 
         RRateLimiter limiter = redisson.getRateLimiter("myLimiter");
         // one permit per 2 seconds
